@@ -1,1 +1,3 @@
-exports.Client = require("./client.js").Client;
+const {Client} = require("./client");
+
+exports.Client = Client;
