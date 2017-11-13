@@ -1,5 +1,7 @@
 const WebSocket = require("websocket").client;
 const {Logger} = require("./logger");
+const {Message} = require("./datatypes.js");
+
 class GatewayClient {
     constructor(token, client) {
         this.token = "Bot "+ token;
@@ -54,6 +56,16 @@ class GatewayClient {
                     this.logger.log("Recieved event: "+ data["t"]);
                     if(data["t"] === "READY"){
                         this.client.emit("ready");
+                    } else if (data["t"] == "GUILD_CREATE"){
+                        this.logger.log("Recieved guild "+data["d"]["name"]);
+                        this.client.guilds.set(data["d"]["id"], data["d"]);
+                        
+                        for(var channel of data["d"]["channels"]){
+                            this.client.channels.set(channel["id"], channel);
+                            this.logger.log("Added "+channel["name"]);
+                        }
+                    } else if (data["t"] == "MESSAGE_CREATE"){
+                        this.client.emit("message", new Message(data["d"], this.client));
                     }
                     break;
                 case 11:
