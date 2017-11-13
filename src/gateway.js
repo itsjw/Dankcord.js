@@ -52,6 +52,9 @@ class GatewayClient {
                     break;
                 case 0:
                     this.logger.log("Recieved event: "+ data["t"]);
+                    if(data["t"] === "READY"){
+                        this.client.emit("ready");
+                    }
                     break;
                 case 11:
                     this.logger.log("Heartbeat acknowledged");
