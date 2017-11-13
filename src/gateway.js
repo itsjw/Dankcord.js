@@ -2,7 +2,7 @@ const WebSocket = require("websocket").client;
 const {Logger} = require("./logger");
 class GatewayClient {
     constructor(token, client) {
-        this.token = token;
+        this.token = "Bot "+ token;
         this.client = client;
         this.logger = new Logger("websocket");
         this.s = null;
