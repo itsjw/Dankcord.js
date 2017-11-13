@@ -6,3 +6,4 @@ class HTTPClient {
         }
     }
 }
+exports.HTTPClient = HTTPClient;
