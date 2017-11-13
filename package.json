@@ -6,5 +6,8 @@
   "repository": "git@github.com:JoeBanks13/Dankcord.js.git",
   "author": "Joseph <joseph@josephbanks.me>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependancies": {
+    "websocket": "1.0.25"
+  }
 }
