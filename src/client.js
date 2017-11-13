@@ -8,6 +8,12 @@ class Client extends EventEmitter {
         this.token = token;
         this.http = new HTTPClient(token);
         this.gateway = new GatewayClient(token, this);
+        this.guilds = new Map();
+        this.channels = new Map();
+    }
+
+    start() {
+        this.gateway.start();
     }
 }
 exports.Client = Client;
