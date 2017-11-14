@@ -55,7 +55,7 @@ class GatewayClient {
                 case 0:
                     this.logger.log("Recieved event: "+ data["t"]);
                     if(data["t"] === "READY"){
-                        this.client.user = new Client(data["d"]);
+                        new Client(data["d"], this.client);
                         this.client.emit("ready");
                     } else if (data["t"] == "GUILD_CREATE"){
                         this.logger.log("Recieved guild "+data["d"]["name"]);
