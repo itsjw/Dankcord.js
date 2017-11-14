@@ -66,6 +66,8 @@ class GatewayClient {
                         }
                     } else if (data["t"] == "MESSAGE_CREATE"){
                         this.client.emit("message", new Message(data["d"], this.client));
+                    } else if (data["t"] == "MESSAGE_UPDATE"){
+                        this.client.emit("edit", new Message(data["t"], this.client));
                     }
                     break;
                 case 11:
