@@ -4,7 +4,7 @@ class Logger {
     }
 
     log(message) {
-        console.log(`[ ${this.name} ] [ ${(new Date()).toTimeString()} ] ${message}`);
+        console.log(`[ ${this.name} ] [ ${(new Date()).toLocaleTimeString()} ] ${message}`);
     }
 }
 exports.Logger = Logger;
