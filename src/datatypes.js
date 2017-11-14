@@ -11,10 +11,10 @@ class Message {
 exports.Message = Message;
 
 class Client {
-    constructor(data){
-        for(var i of Object.keys(data)){
-            this[i] = data[i];
-        }
+    constructor(data, client){
+        client.user = data["user"];
+        client.shard = data["shard"];
+        client.ready_payload = data;
     }
 }
 exports.Client = Client;
