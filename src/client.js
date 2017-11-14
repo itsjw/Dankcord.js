@@ -4,13 +4,14 @@ const {EventEmitter} = require("events");
 const {Message} = require("./datatypes");
 
 class Client extends EventEmitter {
-    constructor(token){
+    constructor(token, options){
         super();
         this.token = token;
         this.http = new HTTPClient(token);
         this.gateway = new GatewayClient(token, this);
         this.guilds = new Map();
         this.channels = new Map();
+        this.options = options || {};
     }
 
     start() {
