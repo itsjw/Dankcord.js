@@ -1,5 +1,5 @@
 const snekfetch = require("snekfetch");
-
+const {Logger} = require("./logger");
 class HTTPClient {
     constructor(token){
         this.token = token;
@@ -10,6 +10,7 @@ class HTTPClient {
         };
         this.url = "https://discordapp.com/";
         this.base = "api/v6/";
+        this.logger = new Logger("rest");
     }
 
     sendReq(url, method, payload) {
@@ -23,7 +24,7 @@ class HTTPClient {
                 break;
 
             case "post":
-                snekfetch.get(url, {headers: this.headers, data: payload}).then((res) => {
+                snekfetch.post(url, {headers: this.headers, data: payload}).then((res) => {
                     resolve(JSON.parse(res.text));
                 });
             }
