@@ -1,6 +1,6 @@
 const WebSocket = require("websocket").client;
 const {Logger} = require("./logger");
-const {Message} = require("./datatypes.js");
+const {Message, Client} = require("./datatypes.js");
 
 class GatewayClient {
     constructor(token, client) {
@@ -55,6 +55,7 @@ class GatewayClient {
                 case 0:
                     this.logger.log("Recieved event: "+ data["t"]);
                     if(data["t"] === "READY"){
+                        this.client.user = new Client(data["d"]);
                         this.client.emit("ready");
                     } else if (data["t"] == "GUILD_CREATE"){
                         this.logger.log("Recieved guild "+data["d"]["name"]);
