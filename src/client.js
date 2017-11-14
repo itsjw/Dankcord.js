@@ -1,6 +1,7 @@
 const {HTTPClient} = require("./routes.js");
 const {GatewayClient} = require("./gateway.js");
 const {EventEmitter} = require("events");
+const {Message} = require("./datatypes");
 
 class Client extends EventEmitter {
     constructor(token){
@@ -14,6 +15,14 @@ class Client extends EventEmitter {
 
     start() {
         this.gateway.start();
+    }
+
+    sendMessage(channelID, content) {
+        return new Promise((resolve) => {
+            this.http.sendReq("channels/"+channelID, "post", {content: content}).then((res) => {
+                resolve(new Message(res, this.client));
+            });
+        });
     }
 }
 exports.Client = Client;
