@@ -82,6 +82,9 @@ class GatewayClient {
             conn.on("close", (code, desc) => {
                 clearInterval(this.heartbeater);
                 this.logger.log("WebSocket closed with "+code+" and desc "+desc);
+                if (this.client.options.reconnect){
+                    this.start();
+                }
             });
         });
     }
