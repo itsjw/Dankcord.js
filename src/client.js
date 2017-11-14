@@ -19,7 +19,7 @@ class Client extends EventEmitter {
 
     sendMessage(channelID, content) {
         return new Promise((resolve) => {
-            this.http.sendReq("channels/"+channelID+"/messages", "post", {content: content}).then((res) => {
+            this.http.sendReq("channels/"+channelID.toString()+"/messages", "post", {content: content}).then((res) => {
                 resolve(new Message(res, this.client));
             });
         });
