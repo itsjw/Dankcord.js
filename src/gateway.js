@@ -45,7 +45,7 @@ class GatewayClient {
                         }
                     }));
                     this.logger.log("Sent identify payload");
-                    setInterval(() => {
+                    this.heartbeater = setInterval(() => {
                         this.logger.log("Sending heartbeat");
                         conn.send(JSON.stringify({"op": 1, "d": this.s}));
                     }, heartbeat);
@@ -80,6 +80,7 @@ class GatewayClient {
             });
 
             conn.on("close", (code, desc) => {
+                clearInterval(this.heartbeater);
                 this.logger.log("WebSocket closed with "+code+" and desc "+desc);
             });
         });
